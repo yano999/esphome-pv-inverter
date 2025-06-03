@@ -1,0 +1,36 @@
+substitutions:
+  modbus_inverter_address: "0x01" # Default Modbus address, should be changed to match inverter settings
+  wifi_ssid: !secret wifi_ssid
+  wifi_password: !secret wifi_password
+  api_key: !secret deye_inverter_api_key
+  ota_password: !secret deye_inverter_ota_password
+  fallback_password: !secret deye_inverter_fallback_password
+  safe_mode_delay: 600s # Time after which transition to safe mode and setting default operating parameters will occur
+
+packages:
+  deye_hybrid_3p: !include
+    file: pv_inverter/deye_hybrid_3p.yaml # SG04LP3 Low Voltage
+    # file: pv_inverter/deye_hybrid_3p_hv.yaml # SG01HP3 High Voltage
+    vars:
+      # Safe Mode parameters
+      default_maximum_battery_charge_current: 140 # Amps
+      default_max_sell_power: 12000 # Watts
+      default_system_work_mode: "Zero Export To Load" # "Selling First", "Zero Export To Load", "Zero Export To CT"
+      default_solar_sell: "on" # "on", "off"
+
+# Set appropriately if using a different board. https://esphome.io/components/#supported-microcontrollers
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+uart:
+  # Default TX and RX pins, if TTL converter is connected differently, set appropriate pins
+  tx_pin: GPIO17
+  rx_pin: GPIO16
+
+modbus:
+#  flow_control_pin: GPIO4 # Uncomment and set appropriate pin if your TTL converter requires it
+
+#logger:
+#   level: VERBOSE

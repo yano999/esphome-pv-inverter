@@ -1,0 +1,359 @@
+﻿sensor:
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Load L1 Voltage"
+    register_type: holding
+    address: 644
+    unit_of_measurement: "V"
+    device_class: voltage
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    value_type: U_WORD
+    icon: "mdi:sine-wave"
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Load L2 Voltage"
+    register_type: holding
+    address: 645
+    unit_of_measurement: "V"
+    device_class: voltage
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    value_type: U_WORD
+    icon: "mdi:sine-wave"
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Load L3 Voltage"
+    register_type: holding
+    address: 646
+    unit_of_measurement: "V"
+    device_class: voltage
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    value_type: U_WORD
+    icon: "mdi:sine-wave"
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Load L1 Power Low"
+    id: load_l1_power_low
+    register_type: holding
+    address: 650
+    accuracy_decimals: 0
+    value_type: U_WORD
+    internal: true
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Load L1 Power High"
+    id: load_l1_power_high
+    register_type: holding
+    address: 656
+    accuracy_decimals: 0
+    value_type: U_WORD
+    internal: true
+
+  - platform: template
+    name: "Load L1 Power"
+    unit_of_measurement: "W"
+    device_class: power
+    accuracy_decimals: 0
+    update_interval: 5s
+    icon: "mdi:home-lightning-bolt"
+    lambda: |-
+      return helpers::combine_modbus_registers(
+        id(load_l1_power_low).state, 
+        id(load_l1_power_high).state
+      );
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Load L2 Power Low"
+    id: load_l2_power_low
+    register_type: holding
+    address: 651
+    accuracy_decimals: 0
+    value_type: U_WORD
+    internal: true
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Load L2 Power High"
+    id: load_l2_power_high
+    register_type: holding
+    address: 657
+    accuracy_decimals: 0
+    value_type: U_WORD
+    internal: true
+
+  - platform: template
+    name: "Load L2 Power"
+    unit_of_measurement: "W"
+    device_class: power
+    accuracy_decimals: 0
+    update_interval: 5s
+    icon: "mdi:home-lightning-bolt"
+    lambda: |-
+      return helpers::combine_modbus_registers(
+        id(load_l2_power_low).state, 
+        id(load_l2_power_high).state
+      );
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Load L3 Power Low"
+    id: load_l3_power_low
+    register_type: holding
+    address: 652
+    accuracy_decimals: 0
+    value_type: U_WORD
+    internal: true
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Load L3 Power High"
+    id: load_l3_power_high
+    register_type: holding
+    address: 658
+    accuracy_decimals: 0
+    value_type: U_WORD
+    internal: true
+
+  - platform: template
+    name: "Load L3 Power"
+    unit_of_measurement: "W"
+    device_class: power
+    accuracy_decimals: 0
+    update_interval: 5s
+    icon: "mdi:home-lightning-bolt"
+    lambda: |-
+      return helpers::combine_modbus_registers(
+        id(load_l3_power_low).state, 
+        id(load_l3_power_high).state
+      );
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Load Power Low"
+    id: load_power_low
+    register_type: holding
+    address: 653
+    accuracy_decimals: 0
+    value_type: U_WORD
+    internal: true
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Load Power High"
+    id: load_power_high
+    register_type: holding
+    address: 659
+    accuracy_decimals: 0
+    value_type: U_WORD
+    internal: true
+
+  - platform: template
+    name: "Load Power"
+    unit_of_measurement: "W"
+    device_class: power
+    accuracy_decimals: 0
+    update_interval: 5s
+    icon: "mdi:home-lightning-bolt"
+    lambda: |-
+      return helpers::combine_modbus_registers(
+        id(load_power_low).state, 
+        id(load_power_high).state
+      );
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Load Frequency"
+    register_type: holding
+    address: 655
+    unit_of_measurement: "Hz"
+    device_class: frequency
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.01
+    value_type: U_WORD
+    icon: "mdi:sine-wave"
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Daily Load Consumption"
+    id: daily_load_consumption
+    register_type: holding
+    address: 526
+    unit_of_measurement: "kWh"
+    device_class: energy
+    state_class: "total_increasing"
+    accuracy_decimals: 1
+    value_type: U_WORD
+    filters:
+      - multiply: 0.1
+    icon: "mdi:home-lightning-bolt"
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Total Consumption"
+    id: total_consumption
+    register_type: holding
+    address: 527
+    unit_of_measurement: "kWh"
+    device_class: energy
+    state_class: "total_increasing"
+    accuracy_decimals: 1
+    value_type: U_DWORD_R
+    filters:
+      - multiply: 0.1
+    icon: "mdi:home-lightning-bolt"
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "UPS L1 Power Low"
+    id: ups_l1_power_low
+    register_type: holding
+    address: 640
+    accuracy_decimals: 0
+    value_type: U_WORD
+    internal: true
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "UPS L1 Power High"
+    id: ups_l1_power_high
+    register_type: holding
+    address: 696
+    accuracy_decimals: 0
+    value_type: U_WORD
+    internal: true
+
+  - platform: template
+    name: "Load UPS L1 Power"
+    unit_of_measurement: "W"
+    device_class: power
+    accuracy_decimals: 0
+    update_interval: 5s
+    icon: "mdi:home-lightning-bolt"
+    disabled_by_default: true
+    lambda: |-
+      return helpers::combine_modbus_registers(
+        id(ups_l1_power_low).state, 
+        id(ups_l1_power_high).state
+      );
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "UPS L2 Power Low"
+    id: ups_l2_power_low
+    register_type: holding
+    address: 641
+    accuracy_decimals: 0
+    value_type: U_WORD
+    internal: true
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "UPS L2 Power High"
+    id: ups_l2_power_high
+    register_type: holding
+    address: 697
+    accuracy_decimals: 0
+    value_type: U_WORD
+    internal: true
+
+  - platform: template
+    name: "Load UPS L2 Power"
+    unit_of_measurement: "W"
+    device_class: power
+    accuracy_decimals: 0
+    update_interval: 5s
+    icon: "mdi:home-lightning-bolt"
+    disabled_by_default: true
+    lambda: |-
+      return helpers::combine_modbus_registers(
+        id(ups_l2_power_low).state, 
+        id(ups_l2_power_high).state
+      );
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "UPS L3 Power Low"
+    id: ups_l3_power_low
+    register_type: holding
+    address: 642
+    accuracy_decimals: 0
+    value_type: U_WORD
+    internal: true
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "UPS L3 Power High"
+    id: ups_l3_power_high
+    register_type: holding
+    address: 698
+    accuracy_decimals: 0
+    value_type: U_WORD
+    internal: true
+
+  - platform: template
+    name: "Load UPS L3 Power"
+    unit_of_measurement: "W"
+    device_class: power
+    accuracy_decimals: 0
+    update_interval: 5s
+    icon: "mdi:home-lightning-bolt"
+    disabled_by_default: true
+    lambda: |-
+      return helpers::combine_modbus_registers(
+        id(ups_l3_power_low).state, 
+        id(ups_l3_power_high).state
+      );
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "UPS Power Low"
+    id: ups_power_low
+    register_type: holding
+    address: 643
+    accuracy_decimals: 0
+    value_type: U_WORD
+    internal: true
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "UPS Power High"
+    id: ups_power_high
+    register_type: holding
+    address: 699
+    accuracy_decimals: 0
+    value_type: U_WORD
+    internal: true
+
+  - platform: template
+    name: "Load UPS Power"
+    unit_of_measurement: "W"
+    device_class: power
+    accuracy_decimals: 0
+    update_interval: 5s
+    icon: "mdi:home-lightning-bolt"
+    disabled_by_default: true
+    lambda: |-
+      return helpers::combine_modbus_registers(
+        id(ups_power_low).state, 
+        id(ups_power_high).state
+      );
+
+binary_sensor:
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "AC Load Relay Reserved"
+    register_type: holding
+    address: 552
+    bitmask: 0x2
+    icon: "mdi:toggle-switch-variant"

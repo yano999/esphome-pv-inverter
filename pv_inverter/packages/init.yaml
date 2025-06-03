@@ -1,0 +1,54 @@
+﻿esphome:
+  name: "${name}"
+  friendly_name: "${friendly_name}"
+  comment: "${device_description} by Lewa-Reka https://github.com/Lewa-Reka/esphome-pv-inverter"
+
+logger:
+  level: WARN
+
+api:
+  encryption:
+    key: ${api_key}
+  on_client_disconnected:
+    - delay: ${safe_mode_delay}
+    - if:
+        condition:
+          not: api.connected
+        then:
+          - logger.log: "Lost connection to HomeAssistant API - Activating safe mode"
+          - script.execute: set_safe_modbus_registers
+
+  on_client_connected:
+    - logger.log: "Connection to HomeAssistant API restored"
+
+ota:
+  - platform: esphome
+    password: ${ota_password}
+
+wifi:
+  ssid: ${wifi_ssid}
+  password: ${wifi_password}
+
+  ap:
+    ssid: "Deye Inverter Fallback Hotspot"
+    password: ${fallback_password}
+
+captive_portal:
+
+uart:
+  id: modbus_uart
+  baud_rate: 19200
+  stop_bits: 1
+
+modbus:
+  id: modbus_1
+  uart_id: modbus_uart
+
+modbus_controller:
+  - id: ${modbus_controller_id}
+    address: ${modbus_inverter_address}
+    modbus_id: modbus_1
+    setup_priority: -10
+    update_interval: 5s
+    command_throttle: 60ms
+    offline_skip_updates: 3
