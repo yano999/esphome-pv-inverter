@@ -1,5 +1,10 @@
 # ESPHome PV Inverter
 
+![Maintenance](https://img.shields.io/maintenance/yes/2025?style=for-the-badge)
+![GitHub License](https://img.shields.io/github/license/lewa-reka/esphome-pv-inverter?style=for-the-badge)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/y/lewa-reka/esphome-pv-inverter?style=for-the-badge)
+
+
 An ESPHome-based solution for monitoring and controlling photovoltaic inverters via Modbus RTU communication. This project provides comprehensive integration with Home Assistant, enabling real-time monitoring and control of solar power systems.
 
 ## 📋 Currently Supported Inverters
