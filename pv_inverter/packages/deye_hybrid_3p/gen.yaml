@@ -241,6 +241,7 @@ select:
     name: "Generator Port Use"
     address: 133
     value_type: U_WORD
+    entity_category: config
     icon: "mdi:connection"
     optionsmap:
       "Generator Input": 0
