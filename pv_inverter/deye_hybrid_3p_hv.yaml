@@ -1,6 +1,6 @@
 substitutions:
-  device_description: "Deye Inverter SG01HP3"
+  device_description: "Deye Inverter SG0XHP3"
 
 packages:
-  deye_hybrid_3p: !include deye_hybrid_3p.yaml
+  deye_hybrid_3p: !include deye_hybrid_3p_lv.yaml
   hv: !include packages/deye_hybrid_3p/_hv.yaml
