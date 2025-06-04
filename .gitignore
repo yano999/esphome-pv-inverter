@@ -4,3 +4,4 @@
 /.esphome/
 /.examples/
 /secrets.yaml
+pv-inv-local-test.yaml

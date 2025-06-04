@@ -87,7 +87,7 @@
     register_type: holding
     address: 633
     accuracy_decimals: 0
-    value_type: U_WORD
+    value_type: S_WORD
     internal: true
 
   - platform: modbus_controller
@@ -97,7 +97,7 @@
     register_type: holding
     address: 691
     accuracy_decimals: 0
-    value_type: U_WORD
+    value_type: S_WORD
     internal: true
 
   - platform: template
@@ -115,14 +115,7 @@
         return NAN;
       }
 
-      uint32_t low = (uint32_t)low_value;
-      uint32_t high = (uint32_t)high_value;
-      uint32_t combined_value = (high << 16) | (low & 0xFFFF);
-
-      if (combined_value > 0x7FFFFFFF) {
-        return (float)((int32_t)combined_value);
-      }
-
+      int32_t combined_value = ((int32_t)high_value << 16) | ((int32_t)low_value & 0xFFFF);
       return (float)combined_value;
 
   - platform: modbus_controller
@@ -132,7 +125,7 @@
     register_type: holding
     address: 634
     accuracy_decimals: 0
-    value_type: U_WORD
+    value_type: S_WORD
     internal: true
 
   - platform: modbus_controller
@@ -142,7 +135,7 @@
     register_type: holding
     address: 692
     accuracy_decimals: 0
-    value_type: U_WORD
+    value_type: S_WORD
     internal: true
 
   - platform: template
@@ -160,14 +153,7 @@
         return NAN;
       }
 
-      uint32_t low = (uint32_t)low_value;
-      uint32_t high = (uint32_t)high_value;
-      uint32_t combined_value = (high << 16) | (low & 0xFFFF);
-
-      if (combined_value > 0x7FFFFFFF) {
-        return (float)((int32_t)combined_value);
-      }
-
+      int32_t combined_value = ((int32_t)high_value << 16) | ((int32_t)low_value & 0xFFFF);
       return (float)combined_value;
 
   - platform: modbus_controller
@@ -177,7 +163,7 @@
     register_type: holding
     address: 635
     accuracy_decimals: 0
-    value_type: U_WORD
+    value_type: S_WORD
     internal: true
 
   - platform: modbus_controller
@@ -187,7 +173,7 @@
     register_type: holding
     address: 693
     accuracy_decimals: 0
-    value_type: U_WORD
+    value_type: S_WORD
     internal: true
 
   - platform: template
@@ -205,14 +191,7 @@
         return NAN;
       }
 
-      uint32_t low = (uint32_t)low_value;
-      uint32_t high = (uint32_t)high_value;
-      uint32_t combined_value = (high << 16) | (low & 0xFFFF);
-
-      if (combined_value > 0x7FFFFFFF) {
-        return (float)((int32_t)combined_value);
-      }
-
+      int32_t combined_value = ((int32_t)high_value << 16) | ((int32_t)low_value & 0xFFFF);
       return (float)combined_value;
 
   - platform: modbus_controller
@@ -222,7 +201,7 @@
     register_type: holding
     address: 636
     accuracy_decimals: 0
-    value_type: U_WORD
+    value_type: S_WORD
     internal: true
 
   - platform: modbus_controller
@@ -232,7 +211,7 @@
     register_type: holding
     address: 694
     accuracy_decimals: 0
-    value_type: U_WORD
+    value_type: S_WORD
     internal: true
 
   - platform: template
@@ -250,14 +229,7 @@
         return NAN;
       }
 
-      uint32_t low = (uint32_t)low_value;
-      uint32_t high = (uint32_t)high_value;
-      uint32_t combined_value = (high << 16) | (low & 0xFFFF);
-
-      if (combined_value > 0x7FFFFFFF) {
-        return (float)((int32_t)combined_value);
-      }
-
+      int32_t combined_value = ((int32_t)high_value << 16) | ((int32_t)low_value & 0xFFFF);
       return (float)combined_value;
 
   - platform: modbus_controller
