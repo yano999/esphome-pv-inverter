@@ -30,7 +30,7 @@ wifi:
   password: ${wifi_password}
 
   ap:
-    ssid: "Deye Inverter Fallback Hotspot"
+    ssid: "${friendly_name} Fallback Hotspot"
     password: ${fallback_password}
 
 captive_portal:
