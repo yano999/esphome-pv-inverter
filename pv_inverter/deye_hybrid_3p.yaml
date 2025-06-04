@@ -16,10 +16,6 @@ packages:
   pv: !include packages/deye_hybrid_3p/pv.yaml
   tou: !include packages/deye_hybrid_3p/tou.yaml
 
-esphome:
-  includes:
-    - pv_inverter/packages/deye_hybrid_3p/src/helpers.h
-
 script:
   - id: set_safe_modbus_registers
     then:

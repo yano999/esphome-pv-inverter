@@ -27,10 +27,22 @@
     update_interval: 5s
     icon: "mdi:transmission-tower"
     lambda: |-
-      return helpers::combine_modbus_registers(
-        id(grid_l1_power_low).state, 
-        id(grid_l1_power_high).state
-      );
+      float low_value = id(grid_l1_power_low).state;
+      float high_value = id(grid_l1_power_high).state;
+
+      if (isnan(low_value) || isnan(high_value)) {
+        return NAN;
+      }
+
+      uint32_t low = (uint32_t)low_value;
+      uint32_t high = (uint32_t)high_value;
+      uint32_t combined_value = (high << 16) | (low & 0xFFFF);
+
+      if (combined_value > 0x7FFFFFFF) {
+        return (float)((int32_t)combined_value);
+      }
+
+      return (float)combined_value;
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
@@ -60,10 +72,22 @@
     update_interval: 5s
     icon: "mdi:transmission-tower"
     lambda: |-
-      return helpers::combine_modbus_registers(
-        id(grid_l2_power_low).state, 
-        id(grid_l2_power_high).state
-      );
+      float low_value = id(grid_l2_power_low).state;
+      float high_value = id(grid_l2_power_high).state;
+
+      if (isnan(low_value) || isnan(high_value)) {
+        return NAN;
+      }
+
+      uint32_t low = (uint32_t)low_value;
+      uint32_t high = (uint32_t)high_value;
+      uint32_t combined_value = (high << 16) | (low & 0xFFFF);
+
+      if (combined_value > 0x7FFFFFFF) {
+        return (float)((int32_t)combined_value);
+      }
+
+      return (float)combined_value;
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
@@ -93,10 +117,22 @@
     update_interval: 5s
     icon: "mdi:transmission-tower"
     lambda: |-
-      return helpers::combine_modbus_registers(
-        id(grid_l3_power_low).state, 
-        id(grid_l3_power_high).state
-      );
+      float low_value = id(grid_l3_power_low).state;
+      float high_value = id(grid_l3_power_high).state;
+
+      if (isnan(low_value) || isnan(high_value)) {
+        return NAN;
+      }
+
+      uint32_t low = (uint32_t)low_value;
+      uint32_t high = (uint32_t)high_value;
+      uint32_t combined_value = (high << 16) | (low & 0xFFFF);
+
+      if (combined_value > 0x7FFFFFFF) {
+        return (float)((int32_t)combined_value);
+      }
+
+      return (float)combined_value;
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
@@ -126,10 +162,22 @@
     update_interval: 5s
     icon: "mdi:transmission-tower"
     lambda: |-
-      return helpers::combine_modbus_registers(
-        id(grid_power_low).state, 
-        id(grid_power_high).state
-      );
+      float low_value = id(grid_power_low).state;
+      float high_value = id(grid_power_high).state;
+
+      if (isnan(low_value) || isnan(high_value)) {
+        return NAN;
+      }
+
+      uint32_t low = (uint32_t)low_value;
+      uint32_t high = (uint32_t)high_value;
+      uint32_t combined_value = (high << 16) | (low & 0xFFFF);
+
+      if (combined_value > 0x7FFFFFFF) {
+        return (float)((int32_t)combined_value);
+      }
+
+      return (float)combined_value;
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
@@ -287,10 +335,22 @@
     update_interval: 5s
     icon: "mdi:transmission-tower"
     lambda: |-
-      return helpers::combine_modbus_registers(
-        id(internal_ct_l1_power_low).state, 
-        id(internal_ct_l1_power_high).state
-      );
+      float low_value = id(internal_ct_l1_power_low).state;
+      float high_value = id(internal_ct_l1_power_high).state;
+
+      if (isnan(low_value) || isnan(high_value)) {
+        return NAN;
+      }
+
+      uint32_t low = (uint32_t)low_value;
+      uint32_t high = (uint32_t)high_value;
+      uint32_t combined_value = (high << 16) | (low & 0xFFFF);
+
+      if (combined_value > 0x7FFFFFFF) {
+        return (float)((int32_t)combined_value);
+      }
+
+      return (float)combined_value;
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
@@ -320,10 +380,22 @@
     update_interval: 5s
     icon: "mdi:transmission-tower"
     lambda: |-
-      return helpers::combine_modbus_registers(
-        id(internal_ct_l2_power_low).state, 
-        id(internal_ct_l2_power_high).state
-      );
+      float low_value = id(internal_ct_l2_power_low).state;
+      float high_value = id(internal_ct_l2_power_high).state;
+
+      if (isnan(low_value) || isnan(high_value)) {
+        return NAN;
+      }
+
+      uint32_t low = (uint32_t)low_value;
+      uint32_t high = (uint32_t)high_value;
+      uint32_t combined_value = (high << 16) | (low & 0xFFFF);
+
+      if (combined_value > 0x7FFFFFFF) {
+        return (float)((int32_t)combined_value);
+      }
+
+      return (float)combined_value;
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
@@ -353,10 +425,22 @@
     update_interval: 5s
     icon: "mdi:transmission-tower"
     lambda: |-
-      return helpers::combine_modbus_registers(
-        id(internal_ct_l3_power_low).state, 
-        id(internal_ct_l3_power_high).state
-      );
+      float low_value = id(internal_ct_l3_power_low).state;
+      float high_value = id(internal_ct_l3_power_high).state;
+
+      if (isnan(low_value) || isnan(high_value)) {
+        return NAN;
+      }
+
+      uint32_t low = (uint32_t)low_value;
+      uint32_t high = (uint32_t)high_value;
+      uint32_t combined_value = (high << 16) | (low & 0xFFFF);
+
+      if (combined_value > 0x7FFFFFFF) {
+        return (float)((int32_t)combined_value);
+      }
+
+      return (float)combined_value;
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
@@ -386,10 +470,22 @@
     update_interval: 5s
     icon: "mdi:transmission-tower"
     lambda: |-
-      return helpers::combine_modbus_registers(
-        id(internal_ct_power_low).state, 
-        id(internal_ct_power_high).state
-      );
+      float low_value = id(internal_ct_power_low).state;
+      float high_value = id(internal_ct_power_high).state;
+
+      if (isnan(low_value) || isnan(high_value)) {
+        return NAN;
+      }
+
+      uint32_t low = (uint32_t)low_value;
+      uint32_t high = (uint32_t)high_value;
+      uint32_t combined_value = (high << 16) | (low & 0xFFFF);
+
+      if (combined_value > 0x7FFFFFFF) {
+        return (float)((int32_t)combined_value);
+      }
+
+      return (float)combined_value;
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
@@ -419,10 +515,22 @@
     update_interval: 5s
     icon: "mdi:transmission-tower"
     lambda: |-
-      return helpers::combine_modbus_registers(
-        id(external_ct_l1_power_low).state, 
-        id(external_ct_l1_power_high).state
-      );
+      float low_value = id(external_ct_l1_power_low).state;
+      float high_value = id(external_ct_l1_power_high).state;
+
+      if (isnan(low_value) || isnan(high_value)) {
+        return NAN;
+      }
+
+      uint32_t low = (uint32_t)low_value;
+      uint32_t high = (uint32_t)high_value;
+      uint32_t combined_value = (high << 16) | (low & 0xFFFF);
+
+      if (combined_value > 0x7FFFFFFF) {
+        return (float)((int32_t)combined_value);
+      }
+
+      return (float)combined_value;
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
@@ -452,10 +560,22 @@
     update_interval: 5s
     icon: "mdi:transmission-tower"
     lambda: |-
-      return helpers::combine_modbus_registers(
-        id(external_ct_l2_power_low).state, 
-        id(external_ct_l2_power_high).state
-      );
+      float low_value = id(external_ct_l2_power_low).state;
+      float high_value = id(external_ct_l2_power_high).state;
+
+      if (isnan(low_value) || isnan(high_value)) {
+        return NAN;
+      }
+
+      uint32_t low = (uint32_t)low_value;
+      uint32_t high = (uint32_t)high_value;
+      uint32_t combined_value = (high << 16) | (low & 0xFFFF);
+
+      if (combined_value > 0x7FFFFFFF) {
+        return (float)((int32_t)combined_value);
+      }
+
+      return (float)combined_value;
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
@@ -485,10 +605,22 @@
     update_interval: 5s
     icon: "mdi:transmission-tower"
     lambda: |-
-      return helpers::combine_modbus_registers(
-        id(external_ct_l3_power_low).state, 
-        id(external_ct_l3_power_high).state
-      );
+      float low_value = id(external_ct_l3_power_low).state;
+      float high_value = id(external_ct_l3_power_high).state;
+
+      if (isnan(low_value) || isnan(high_value)) {
+        return NAN;
+      }
+
+      uint32_t low = (uint32_t)low_value;
+      uint32_t high = (uint32_t)high_value;
+      uint32_t combined_value = (high << 16) | (low & 0xFFFF);
+
+      if (combined_value > 0x7FFFFFFF) {
+        return (float)((int32_t)combined_value);
+      }
+
+      return (float)combined_value;
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
@@ -518,10 +650,22 @@
     update_interval: 5s
     icon: "mdi:transmission-tower"
     lambda: |-
-      return helpers::combine_modbus_registers(
-        id(external_ct_power_low).state, 
-        id(external_ct_power_high).state
-      );
+      float low_value = id(external_ct_power_low).state;
+      float high_value = id(external_ct_power_high).state;
+
+      if (isnan(low_value) || isnan(high_value)) {
+        return NAN;
+      }
+
+      uint32_t low = (uint32_t)low_value;
+      uint32_t high = (uint32_t)high_value;
+      uint32_t combined_value = (high << 16) | (low & 0xFFFF);
+
+      if (combined_value > 0x7FFFFFFF) {
+        return (float)((int32_t)combined_value);
+      }
+
+      return (float)combined_value;
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
