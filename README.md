@@ -4,13 +4,14 @@
 ![GitHub License](https://img.shields.io/github/license/lewa-reka/esphome-pv-inverter?style=for-the-badge)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/lewa-reka/esphome-pv-inverter?style=for-the-badge)
 
-
 An ESPHome-based solution for monitoring and controlling photovoltaic inverters via Modbus RTU communication. This project provides comprehensive integration with Home Assistant, enabling real-time monitoring and control of solar power systems.
 
 ## 📋 Currently Supported Inverters
 
 - **Deye SG04LP3** (Low Voltage)
+- **Deye SG05LP3** (Low Voltage)
 - **Deye SG01HP3** (High Voltage)
+- **Deye SG02HP3** (High Voltage)
 
 ## 🚀 Features
 
@@ -19,7 +20,7 @@ An ESPHome-based solution for monitoring and controlling photovoltaic inverters 
 - **Home Assistant Integration**: Seamless integration with Home Assistant via ESPHome API
 - **Safety Features**: Automatic fallback to safe operating parameters when connection to Home Assistant is lost
 - **Modular Design**: Clean, maintainable code structure with separate packages for different system components
-- **Multiple Inverter Support**: Supports both low voltage (SG04LP3) and high voltage (SG01HP3) Deye inverters
+- **Multiple Inverter Support**: Currently supports both low voltage (SG04LP3) and high voltage (SG01HP3) Deye inverters
 
 ## 🛠️ Hardware Requirements
 
@@ -44,14 +45,30 @@ GND         -> GND             -> GND (Modbus)
 
 ## ⚙️ Installation
 
-### 1. Prerequisites
+### Method 1: Home Assistant ESPHome Add-on (Recommended)
 
-- [ESPHome](https://esphome.io/) installed
-- [Home Assistant](https://www.home-assistant.io/) (optional but recommended)
-- Basic knowledge of YAML configuration
+This is the easiest way to get started if you're using Home Assistant.
 
-### 2. Configuration
+#### Prerequisites
+- [Home Assistant](https://www.home-assistant.io/) with Add-on store access
+- ESP development board
+- RS485 to TTL converter
 
+#### Step 1: Install ESPHome Add-on
+1. In Home Assistant, go to **Settings** → **Add-ons** → **Add-on Store**
+2. Search for **"ESPHome"** and click **Install**
+3. After installation, click **Start** and optionally enable **"Start on boot"**
+4. Click **"Open Web UI"** to access ESPHome dashboard
+
+#### Step 2: Add New Device
+1. In ESPHome dashboard, click **"+ NEW DEVICE"**
+2. Click **"CONTINUE"** on the welcome screen
+3. Enter a name for your device (e.g., "PV Inverter")
+4. Select your **"ESP"** device as device type
+5. Click **"NEXT"** and note down the encryption key (save it safely)
+6. Click **"SKIP"** for now - we'll add the configuration manually
+
+#### Step 3: Configure Device
 1. **Create secrets file**:
    Create `secrets.yaml` in your ESPHome configuration directory:
    ```yaml
@@ -61,25 +78,54 @@ GND         -> GND             -> GND (Modbus)
    deye_inverter_ota_password: "your-ota-password"
    deye_inverter_fallback_password: "your-fallback-password"
    ```
+2. Click **"EDIT"** on your newly created device
+3. **Replace the entire content** with the configuration from [`pv-inverter.yaml`](pv-inverter.yaml)
+4. Click **"SAVE"** and then **"INSTALL"**
 
-2. **Adjust configuration**:
-   Edit `pv_inverter.yaml` to match your setup:
-   - Set the correct Modbus address (`modbus_inverter_address`)
-   - Choose the appropriate inverter variant (LV or HV)
-   - Configure GPIO pins if different from defaults
-   - Adjust safety parameters as needed
+#### Step 4: Flash to ESP32
+1. Connect your ESP32 to your computer via USB
+2. Click **"Plug into this computer"**
+3. Select the correct COM port
+4. Click **"INSTALL"** and wait for the process to complete
+5. Click **"STOP LOGS"** when installation is finished
 
-### 3. Flash to ESP32
+#### Step 5: Connect Hardware
+1. Disconnect ESP32 from computer
+2. Connect RS485 converter according to wiring diagram above
+3. Power up the ESP32 (via USB power adapter or external power)
+4. The device should appear in Home Assistant automatically under **Settings** → **Devices & Services** → **ESPHome**
 
-Use ESPHome Builder or 
+### Method 2: ESPHome CLI
 
-```bash
-esphome run pv_inverter.yaml
-```
+If you prefer using command line or don't have Home Assistant:
+
+1. **Install ESPHome CLI**:
+   ```bash
+   pip install esphome
+   ```
+
+2. **Download Configuration**:
+   ```bash
+   wget https://raw.githubusercontent.com/Lewa-Reka/esphome-pv-inverter/main/pv-inverter.yaml
+   ```
+
+3. **Create secrets.yaml**:
+   ```yaml
+   wifi_ssid: "YourWiFiSSID"
+   wifi_password: "YourWiFiPassword"
+   pv_inverter_api_key: "your-32-character-api-key"
+   pv_inverter_ota_password: "your-ota-password"
+   pv_inverter_fallback_password: "your-fallback-password"
+   ```
+
+4. **Flash to ESP**:
+   ```bash
+   esphome run pv-inverter.yaml
+   ```
 
 ## 🔧 Configuration Options
 
-### Main Configuration (`pv_inverter.yaml`)
+### Main Configuration (`pv-inverter.yaml`)
 
 | Parameter | Description | Default |
 |-----------|-------------|---------|
@@ -95,57 +141,84 @@ esphome run pv_inverter.yaml
 - **UART Pins**: GPIO17 (TX), GPIO16 (RX)
 - **Baud Rate**: 19200
 - **Board**: ESP32-DevKit v1 (configurable)
+- **Flow Control**: Optional GPIO4 (uncomment if needed)
 
 ## 🏠 Home Assistant Integration
 
 This project automatically integrates with Home Assistant through the ESPHome API. Once flashed and connected, you'll have access to:
 
 ### Sensors
-- Solar panel voltage, current, and power
-- Battery voltage, current, state of charge, and temperature
-- Grid voltage, current, frequency, and power
-- Load consumption
-- Inverter temperature and status
+- **Solar Production**: Panel voltage, current, and power for each string
+- **Battery**: Voltage, current, state of charge, temperature, and charging status
+- **Grid**: Voltage, current, frequency, power, and energy counters
+- **Load**: Consumption data and UPS power information
+- **Inverter**: Temperature, status, and operating parameters
 
 ### Controls
-- Work mode selection (Selling First, Zero Export to Load, Zero Export to CT)
-- Battery charging parameters
-- Time-of-use settings
-- Solar selling on/off
-- Maximum power limits
+- **Work Modes**: Selling First, Zero Export to Load, Zero Export to CT
+- **Battery Management**: Charging current limits, cut-off voltages
+- **Time-of-Use**: Programmable charging/selling schedules
+- **Power Limits**: Maximum selling and charging power settings
+- **Generator**: Control and monitoring (if connected)
 
 ### Safety Features
-- Automatic transition to safe mode when Home Assistant connection is lost
-- Configurable safety parameters
-- Connection status monitoring
+- **Automatic Safe Mode**: Transitions to safe parameters when Home Assistant connection is lost
+- **Connection Monitoring**: Real-time status of communication links
+- **Parameter Validation**: Ensures all settings remain within safe operating ranges
+- **Emergency Access**: Fallback WiFi hotspot for emergency configuration
 
 ## 🔒 Safety Features
 
-The system includes several safety mechanisms:
+The system includes comprehensive safety mechanisms:
 
 1. **Connection Monitoring**: Continuously monitors connection to Home Assistant
-2. **Safe Mode**: Automatically applies safe operating parameters when disconnected
-3. **Parameter Validation**: Ensures all settings are within safe operating ranges
-4. **Fallback Hotspot**: Creates a WiFi access point for emergency access
+2. **Safe Mode Transition**: Automatically applies safe operating parameters when disconnected for more than 10 minutes
+3. **Parameter Validation**: All settings are validated against safe operating ranges
+4. **Fallback Access**: Emergency WiFi hotspot with configurable password
+5. **Hardware Protection**: Modbus communication timeouts and error handling
+
+## 📊 Monitoring Capabilities
+
+### Real-time Data
+- Solar panel performance (voltage, current, power per string)
+- Battery status (SoC, voltage, current, temperature)
+- Grid parameters (voltage, frequency, power flow)
+- Load consumption (per phase and total)
+- Inverter health (temperature, relay status)
+
+### Historical Data
+- Daily/total energy production and consumption
+- Battery charging/discharging cycles
+- Grid import/export statistics
+- System efficiency calculations
 
 ## 🐛 Troubleshooting
 
 ### Common Issues
 
 1. **No Communication with Inverter**:
-   - Check wiring connections
+   - Check RS485 wiring (A+/B- connections)
    - Verify Modbus address matches inverter settings
    - Ensure correct baud rate (19200)
+   - Check modbus_inverter_address in configuration
 
 2. **WiFi Connection Issues**:
-   - Check SSID and password in secrets.yaml
-   - Verify WiFi signal strength
+   - Verify SSID and password in configuration
+   - Check WiFi signal strength at ESP32 location
    - Use fallback hotspot for emergency access
+   - Check router firewall settings
 
 3. **Home Assistant Integration Problems**:
-   - Verify API key is correct
-   - Check ESPHome add-on logs
-   - Ensure firewall allows ESPHome traffic
+   - Verify API key matches between configuration and Home Assistant
+   - Check ESPHome add-on logs for connection errors
+   - Ensure ESPHome add-on is running and accessible
+   - Verify network connectivity between devices
+
+4. **Sensor Reading Issues**:
+   - Check ESPHome device logs for Modbus errors
+   - Verify inverter is powered and responsive
+   - Check for electromagnetic interference near RS485 cables
+   - Ensure proper grounding of RS485 converter
 
 ### Debug Mode
 
@@ -155,15 +228,29 @@ logger:
   level: VERBOSE
 ```
 
+Then check logs in ESPHome dashboard or Home Assistant ESPHome integration.
+
+## 🔄 Updates
+
+The configuration automatically updates packages from this repository every 12 hours. To force an update:
+1. In ESPHome dashboard, click "CLEAN BUILD FILES" on your device
+2. Click "INSTALL" to rebuild with latest packages
+
 ## 📝 Contributing
 
-Contributions are welcome! Please feel free to submit issues, feature requests, or pull requests.
+Contributions are welcome! Areas where help is needed:
 
+- **New Inverter Support**: Modbus register mappings for other brands
+- **Feature Enhancements**: Additional monitoring capabilities
+- **Documentation**: Translations, setup guides
+- **Testing**: Validation with different hardware configurations
+
+### Development Process
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+2. Create a feature branch (`git checkout -b feature/new-inverter-support`)
+3. Make your changes with proper testing
+4. Update documentation as needed
+5. Submit a pull request with detailed description
 
 ## 📄 License
 
@@ -174,13 +261,19 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 - [Solarman Stick Logger by David Rapan](https://github.com/davidrapan/ha-solarman) and [pilipphenkel](https://github.com/philipphenkel/esphome-config) for inspirations
 - [ESPHome Team](https://esphome.io/) for the excellent home automation platform
 - [Home Assistant Community](https://community.home-assistant.io/) for continuous support and inspiration
-- Deye inverter users who helped test and improve this integration
+- All contributors and testers who helped improve this integration
 
 ## 📞 Support
 
 - **GitHub Issues**: [Report bugs or request features](https://github.com/Lewa-Reka/esphome-pv-inverter/issues)
-- **Home Assistant Community**: [ESPHome section](https://community.home-assistant.io/c/esphome/)
+- **Discussions**: [GitHub Discussions](https://github.com/Lewa-Reka/esphome-pv-inverter/discussions) for questions and community support
+- **Home Assistant Community**: [ESPHome section](https://community.home-assistant.io/c/esphome/) for general ESPHome help
+
+## 🔗 Related Projects
+
+- [HA-Solarman](https://github.com/davidrapan/ha-solarman) - Alternative WiFi stick integration
+- [ESPHome Official Docs](https://esphome.io/) - ESPHome documentation
 
 ---
 
-**⚠️ Disclaimer**: This project is not officially affiliated with Deye. Use at your own risk and ensure compliance with local electrical codes and regulations. Always consult with a qualified electrician for installation and safety verification. 
+**⚠️ Disclaimer**: This project is not officially affiliated with any pv inverter brand. Use at your own risk and ensure compliance with local electrical codes and regulations. Always consult with a qualified electrician for installation and safety verification. The authors are not responsible for any damage to equipment or injury resulting from the use of this software. 
