@@ -357,7 +357,7 @@ select:
     address: 111
     value_type: U_WORD
     entity_category: config
-    icon: "mdi:battery-settings"
+    icon: "mdi:battery-check"
     optionsmap:
       "Voltage": 0
       "Capacity (%)": 1
