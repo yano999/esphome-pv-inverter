@@ -15,13 +15,11 @@ substitutions:
 
 packages:
   pv_inverter:
-    # pv_inverter: !include
     url: https://github.com/Lewa-Reka/esphome-pv-inverter
     refresh: 12h
-    ref: main
     files:
-      - pv_inverter/deye_hybrid_3p_lv.yaml # SG0XLP3 Low Voltage
-      # - pv_inverter/deye_hybrid_3p_hv.yaml # SG0XHP3 High Voltage
+      pv_inverter/deye_hybrid_3p_lv.yaml # SG0XLP3 Low Voltage
+      # pv_inverter/deye_hybrid_3p_hv.yaml # SG0XHP3 High Voltage
 
 # Set appropriately if using a different board. https://esphome.io/components/#supported-microcontrollers
 esp32:
@@ -35,7 +33,7 @@ uart:
   rx_pin: GPIO16
 
 modbus:
-#  flow_control_pin: GPIO4 # Uncomment and set appropriate pin if your TTL converter requires it
+  flow_control_pin: GPIO4 # Uncomment and set appropriate pin if your TTL converter requires it
 
-#logger:
-#   level: VERBOSE
+# logger:
+#  level: VERBOSE
