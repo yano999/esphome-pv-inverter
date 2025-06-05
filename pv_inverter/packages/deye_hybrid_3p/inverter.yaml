@@ -109,14 +109,8 @@
     icon: "mdi:solar-power"
     lambda: |-
       float low_value = id(output_l1_power_low).state;
-      float high_value = id(output_l1_power_high).state;
 
-      if (isnan(low_value) || isnan(high_value)) {
-        return NAN;
-      }
-
-      int32_t combined_value = ((int32_t)high_value << 16) | ((int32_t)low_value & 0xFFFF);
-      return (float)combined_value;
+      ${func_combine_registers_signed};
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
@@ -147,14 +141,8 @@
     icon: "mdi:solar-power"
     lambda: |-
       float low_value = id(output_l2_power_low).state;
-      float high_value = id(output_l2_power_high).state;
 
-      if (isnan(low_value) || isnan(high_value)) {
-        return NAN;
-      }
-
-      int32_t combined_value = ((int32_t)high_value << 16) | ((int32_t)low_value & 0xFFFF);
-      return (float)combined_value;
+      ${func_combine_registers_signed};
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
@@ -185,14 +173,8 @@
     icon: "mdi:solar-power"
     lambda: |-
       float low_value = id(output_l3_power_low).state;
-      float high_value = id(output_l3_power_high).state;
 
-      if (isnan(low_value) || isnan(high_value)) {
-        return NAN;
-      }
-
-      int32_t combined_value = ((int32_t)high_value << 16) | ((int32_t)low_value & 0xFFFF);
-      return (float)combined_value;
+      ${func_combine_registers_signed};
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
@@ -223,14 +205,8 @@
     icon: "mdi:solar-power"
     lambda: |-
       float low_value = id(output_power_low).state;
-      float high_value = id(output_power_high).state;
 
-      if (isnan(low_value) || isnan(high_value)) {
-        return NAN;
-      }
-
-      int32_t combined_value = ((int32_t)high_value << 16) | ((int32_t)low_value & 0xFFFF);
-      return (float)combined_value;
+      ${func_combine_registers_signed};
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
