@@ -82,131 +82,47 @@
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Output L1 Power Low"
-    id: output_l1_power_low
+    name: "Output L1 Power"
     register_type: holding
     address: 633
-    accuracy_decimals: 0
-    value_type: S_WORD
-    internal: true
-
-  - platform: modbus_controller
-    modbus_controller_id: ${modbus_controller_id}
-    name: "Output L1 Power High"
-    id: output_l1_power_high
-    register_type: holding
-    address: 691
-    accuracy_decimals: 0
-    value_type: S_WORD
-    internal: true
-
-  - platform: template
-    name: "Output L1 Power"
     unit_of_measurement: "W"
     device_class: power
     accuracy_decimals: 0
-    update_interval: 5s
+    value_type: S_WORD
     icon: "mdi:solar-power"
-    lambda: |-
-      float low_value = id(output_l1_power_low).state;
-
-      ${func_combine_registers_signed};
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Output L2 Power Low"
-    id: output_l2_power_low
+    name: "Output L2 Power"
     register_type: holding
     address: 634
-    accuracy_decimals: 0
-    value_type: S_WORD
-    internal: true
-
-  - platform: modbus_controller
-    modbus_controller_id: ${modbus_controller_id}
-    name: "Output L2 Power High"
-    id: output_l2_power_high
-    register_type: holding
-    address: 692
-    accuracy_decimals: 0
-    value_type: S_WORD
-    internal: true
-
-  - platform: template
-    name: "Output L2 Power"
     unit_of_measurement: "W"
     device_class: power
     accuracy_decimals: 0
-    update_interval: 5s
+    value_type: S_WORD
     icon: "mdi:solar-power"
-    lambda: |-
-      float low_value = id(output_l2_power_low).state;
-
-      ${func_combine_registers_signed};
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Output L3 Power Low"
-    id: output_l3_power_low
+    name: "Output L3 Power"
     register_type: holding
     address: 635
-    accuracy_decimals: 0
-    value_type: S_WORD
-    internal: true
-
-  - platform: modbus_controller
-    modbus_controller_id: ${modbus_controller_id}
-    name: "Output L3 Power High"
-    id: output_l3_power_high
-    register_type: holding
-    address: 693
-    accuracy_decimals: 0
-    value_type: S_WORD
-    internal: true
-
-  - platform: template
-    name: "Output L3 Power"
     unit_of_measurement: "W"
     device_class: power
     accuracy_decimals: 0
-    update_interval: 5s
+    value_type: S_WORD
     icon: "mdi:solar-power"
-    lambda: |-
-      float low_value = id(output_l3_power_low).state;
-
-      ${func_combine_registers_signed};
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Output Power Low"
-    id: output_power_low
+    name: "Output Power"
     register_type: holding
     address: 636
-    accuracy_decimals: 0
-    value_type: S_WORD
-    internal: true
-
-  - platform: modbus_controller
-    modbus_controller_id: ${modbus_controller_id}
-    name: "Output Power High"
-    id: output_power_high
-    register_type: holding
-    address: 694
-    accuracy_decimals: 0
-    value_type: S_WORD
-    internal: true
-
-  - platform: template
-    name: "Output Power"
     unit_of_measurement: "W"
     device_class: power
     accuracy_decimals: 0
-    update_interval: 5s
+    value_type: S_WORD
     icon: "mdi:solar-power"
-    lambda: |-
-      float low_value = id(output_power_low).state;
-
-      ${func_combine_registers_signed};
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
