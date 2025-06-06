@@ -145,7 +145,6 @@ sensor:
     accuracy_decimals: 0
     value_type: U_WORD
     icon: "mdi:battery"
-    skip_updates: 180
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}

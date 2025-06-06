@@ -38,7 +38,6 @@
     accuracy_decimals: 0
     value_type: U_WORD
     internal: true
-    skip_updates: 180
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
@@ -49,7 +48,6 @@
     accuracy_decimals: 0
     value_type: U_WORD
     internal: true
-    skip_updates: 180
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
@@ -60,7 +58,6 @@
     accuracy_decimals: 0
     value_type: U_WORD
     internal: true
-    skip_updates: 180
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
@@ -71,7 +68,6 @@
     accuracy_decimals: 0
     value_type: U_WORD
     internal: true
-    skip_updates: 180
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
@@ -82,7 +78,6 @@
     accuracy_decimals: 0
     value_type: U_WORD
     internal: true
-    skip_updates: 180
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
@@ -93,7 +88,6 @@
     accuracy_decimals: 0
     value_type: U_WORD
     internal: true
-    skip_updates: 180
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
@@ -105,7 +99,6 @@
     value_type: U_WORD
     icon: "mdi:identifier"
     entity_category: diagnostic
-    skip_updates: 180
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
@@ -120,7 +113,7 @@
     filters:
       - multiply: 0.1
     value_type: U_DWORD_R
-    skip_updates: 180
+
     icon: "mdi:flash"
 
   - platform: modbus_controller
@@ -132,7 +125,7 @@
     accuracy_decimals: 0
     value_type: U_WORD
     icon: "mdi:solar-panel"
-    skip_updates: 180
+
     entity_category: diagnostic
     filters:
       - lambda: |-
@@ -154,7 +147,7 @@
     accuracy_decimals: 0
     value_type: U_WORD
     icon: "mdi:transmission-tower"
-    skip_updates: 180
+
     entity_category: diagnostic
     filters:
       - lambda: |-
@@ -386,7 +379,7 @@ text_sensor:
     address: 0
     bitmask: 0
     raw_encode: HEXBYTES
-    skip_updates: 180
+
     icon: "mdi:chip"
     entity_category: diagnostic
     lambda: |-
@@ -416,7 +409,7 @@ text_sensor:
     address: 2
     bitmask: 0
     raw_encode: NONE
-    skip_updates: 180
+
     icon: "mdi:protocol"
     entity_category: diagnostic
     lambda: |-
@@ -434,7 +427,7 @@ text_sensor:
     response_size: 10
     bitmask: 0
     raw_encode: NONE
-    skip_updates: 180
+
     icon: "mdi:barcode"
     entity_category: diagnostic
     lambda: |-
@@ -456,7 +449,7 @@ text_sensor:
     address: 10
     bitmask: 0
     raw_encode: NONE
-    skip_updates: 180
+
     icon: "mdi:memory"
     entity_category: diagnostic
     lambda: |-
@@ -473,7 +466,7 @@ text_sensor:
     address: 12
     bitmask: 0
     raw_encode: NONE
-    skip_updates: 180
+
     icon: "mdi:chip"
     entity_category: diagnostic
     lambda: |-
@@ -490,7 +483,7 @@ text_sensor:
     address: 13
     bitmask: 0
     raw_encode: NONE
-    skip_updates: 180
+
     icon: "mdi:chip"
     entity_category: diagnostic
     lambda: |-
