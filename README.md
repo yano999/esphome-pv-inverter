@@ -13,6 +13,17 @@ An ESPHome-based solution for monitoring and controlling photovoltaic inverters 
 - **Deye SG01HP3** (High Voltage)
 - **Deye SG02HP3** (High Voltage)
 
+#### Deye Inverter Configuration
+
+**Recommended baud rate: 19200**
+
+To set the baud rate on your Deye inverter:
+1. Navigate to: **Advanced Settings** → **Paral. Set 3** → **Boud Rate**
+2. Set the value to **19200**
+3. Save the settings
+
+**Note**: After saving, the screen will turn off and a red LED alarm will flash - this is normal behavior. Everything should return to normal after a moment.
+
 ## 🚀 Features
 
 - **Real-time Monitoring**: Monitor PV production, battery status, grid consumption, and load data
