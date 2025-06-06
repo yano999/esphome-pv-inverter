@@ -2,9 +2,7 @@ name: Build CI
 
 on:
   pull_request:
-    paths:
-      - "*.yaml"
-      - ".github/workflows/ci.yml"
+    branches: [main, master, develop]
   push:
     branches: [main, master, develop]
   release:
