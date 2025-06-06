@@ -15,7 +15,7 @@ substitutions:
   default_solar_sell: "on" # "on", "off"
 
 packages:
-  pv_inverter: !include ../pv_inverter/deye_hybrid_3p_lv.yaml
+  pv_inverter: !include pv_inverter/deye_hybrid_3p_lv.yaml
 
 esp32:
   board: esp32dev

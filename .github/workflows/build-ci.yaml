@@ -23,8 +23,8 @@ jobs:
       max-parallel: 3
       matrix:
         file:
-          - tests/deye_hybrid_3p_lv
-          - tests/deye_hybrid_3p_hv
+          - deye_hybrid_3p_lv
+          - deye_hybrid_3p_hv
 
         esphome-version:
           - stable
@@ -33,6 +33,17 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
+
+      - name: Copy test files to main directory
+        run: |
+          if [ -d "tests/" ]; then
+            cp -r tests/* .
+            echo "Copied files from tests/ to main directory"
+          else
+            echo "ERROR: tests/ directory not found"
+            exit 1
+          fi
+
       - name: ESPHome ${{ matrix.esphome-version }}
         uses: esphome/build-action@v7
         with:
