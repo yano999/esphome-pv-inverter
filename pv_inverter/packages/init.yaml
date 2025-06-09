@@ -2,6 +2,9 @@
   name: "${name}"
   friendly_name: "${friendly_name}"
   comment: "${device_description} by Lewa-Reka https://github.com/Lewa-Reka/esphome-pv-inverter"
+  project:
+    name: "lewa-reka.esphome-pv-inverter"
+    version: "0.2.2"
 
 logger:
   level: WARN

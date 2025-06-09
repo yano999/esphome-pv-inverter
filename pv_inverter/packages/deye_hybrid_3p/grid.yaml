@@ -404,6 +404,11 @@ select:
     value_type: U_WORD
     entity_category: config
     icon: "mdi:power-plug"
+    lambda: |-
+      if (x != 0 && x != 1 && x != 2) {
+        return std::string("Disabled");
+      }
+      return {};
     optionsmap:
       "Disabled": 0
       "On Grid Side": 1
