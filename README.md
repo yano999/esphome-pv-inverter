@@ -1,10 +1,13 @@
 # ESPHome PV Inverter
 
 ![Maintenance](https://img.shields.io/maintenance/yes/2025?style=for-the-badge)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/lewa-reka/esphome-pv-inverter/build-ci.yaml?style=for-the-badge)
 ![GitHub License](https://img.shields.io/github/license/lewa-reka/esphome-pv-inverter?style=for-the-badge)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/lewa-reka/esphome-pv-inverter?style=for-the-badge)
 
 An ESPHome-based solution for monitoring and controlling photovoltaic inverters via Modbus RTU communication. This project provides comprehensive integration with Home Assistant, enabling real-time monitoring and control of solar power systems.
+
+Installation & Presentation: https://youtu.be/iJjsA_MzmnE [PL]
 
 ## 📋 Currently Supported Inverters
 
@@ -138,14 +141,23 @@ If you prefer using command line or don't have Home Assistant:
 
 ### Main Configuration (`pv-inverter.yaml`)
 
-| Parameter | Description | Default |
-|-----------|-------------|---------|
-| `modbus_inverter_address` | Modbus address of your inverter | `0x01` |
-| `safe_mode_delay` | Delay before activating safe mode when disconnected | `600s` |
-| `default_maximum_battery_charge_current` | Safe charging current limit | `140A` |
-| `default_max_sell_power` | Safe power export limit | `12000W` |
-| `default_system_work_mode` | Safe operating mode | `"Zero Export To Load"` |
-| `default_solar_sell` | Solar selling state in safe mode | `"on"` |
+| Parameter | Description | Default | Required |
+|-----------|-------------|---------|----------|
+| `name` | Device name in ESPHome | depends on inverter type | No |
+| `friendly_name` | Friendly device name | depends on inverter type | No |
+| `device_description` | Device description | depends on inverter type | No |
+| `modbus_controller_id` | Modbus controller ID | depends on inverter type | No |
+| `modbus_inverter_address` | Modbus address of your inverter | `0x01` | No |
+
+### Inverter Configuration
+
+| Parameter | Description | Default | Required |
+|-----------|-------------|---------|----------|
+| `safe_mode_delay` | Delay before activating safe mode when disconnected | `600s` | No |
+| `default_maximum_battery_charge_current` | Maximum battery charge current in safe mode | `140` | No |
+| `default_max_sell_power` | Maximum power export in safe mode | `12000` | No |
+| `default_system_work_mode` | System work mode in safe mode | `"Zero Export To Load"` | No |
+| `default_solar_sell` | Solar selling state in safe mode | `"on"` | No |
 
 ### Default Hardware Configuration
 
