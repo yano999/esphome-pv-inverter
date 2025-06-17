@@ -227,9 +227,7 @@ sensor:
     address: 216
     unit_of_measurement: "A"
     device_class: current
-    accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
+    accuracy_decimals: 0
     value_type: S_WORD
     icon: "mdi:current-dc"
 
