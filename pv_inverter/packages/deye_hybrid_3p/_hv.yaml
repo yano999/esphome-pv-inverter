@@ -46,6 +46,9 @@ number:
   - id: !extend max_solar_power
     multiply: 0.1
     step: 10
+  - id: !extend zero_export_power
+    multiply: 0.1
+    step: 10
   - id: !extend time_of_use_1_out_power
     multiply: 0.1
     step: 10
