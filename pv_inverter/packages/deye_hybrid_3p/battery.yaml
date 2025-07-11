@@ -95,10 +95,10 @@ sensor:
     address: 587
     unit_of_measurement: "V"
     device_class: voltage
-    accuracy_decimals: 2
+    accuracy_decimals: 1
     filters:
-      - multiply: 10
-    value_type: S_WORD
+      - multiply: 0.01
+    value_type: U_WORD
     icon: "mdi:flash"
 
   - platform: modbus_controller
