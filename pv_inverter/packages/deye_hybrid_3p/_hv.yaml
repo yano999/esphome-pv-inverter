@@ -31,9 +31,9 @@ sensor:
   - id: !extend pv4_power
     filters:
       multiply: 10
-#  - id: !extend battery_voltage
-#    filters:
-#      multiply: 0.1
+  - id: !extend battery_voltage
+    filters:
+      multiply: 0.1
 #    value_type: S_WORD
   - id: !extend battery_2_voltage
     filters:
