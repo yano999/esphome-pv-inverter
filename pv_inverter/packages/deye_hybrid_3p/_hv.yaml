@@ -33,7 +33,7 @@ sensor:
       multiply: 10
   - id: !extend battery_voltage
     filters:
-      multiply: 0.1
+      multiply: 10
 #    value_type: S_WORD
   - id: !extend battery_2_voltage
     filters:
