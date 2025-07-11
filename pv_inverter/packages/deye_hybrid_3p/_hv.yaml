@@ -34,12 +34,14 @@ sensor:
   - id: !extend battery_voltage
     filters:
       multiply: 0.1
+    value_type: S_WORD
   - id: !extend battery_2_voltage
     filters:
       multiply: 0.1
   - id: !extend battery_bms_voltage
     filters:
       multiply: 0.1
+    value_type: S_WORD
   - id: !extend battery_bms_current
     filters:
       multiply: 0.1
