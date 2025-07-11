@@ -40,6 +40,9 @@ sensor:
   - id: !extend battery_bms_voltage
     filters:
       multiply: 0.1
+  - id: !extend battery_bms_current
+    filters:
+      multiply: 0.1
   - id: !extend battery_bms_charging_voltage
     filters:
       multiply: 0.1
