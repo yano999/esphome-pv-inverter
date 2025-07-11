@@ -96,8 +96,8 @@ sensor:
     unit_of_measurement: "V"
     device_class: voltage
     accuracy_decimals: 2
-    filters:
-      - multiply: 0.01
+#    filters:
+#      - multiply: 0.01
     value_type: U_WORD
     icon: "mdi:flash"
 
