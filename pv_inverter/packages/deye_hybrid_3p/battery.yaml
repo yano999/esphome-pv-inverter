@@ -96,6 +96,7 @@ sensor:
     unit_of_measurement: "V"
     device_class: voltage
     accuracy_decimals: 1
+    scale: 0.001
     filters:
       - multiply: 0.01
     value_type: U_WORD
