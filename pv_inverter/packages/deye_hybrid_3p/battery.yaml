@@ -95,9 +95,9 @@ sensor:
     address: 587
     unit_of_measurement: "V"
     device_class: voltage
-    accuracy_decimals: 3
+    accuracy_decimals: 2
     filters:
-      - multiply: 0.01
+      - multiply: 0.0001
     value_type: U_WORD
     icon: "mdi:flash"
 
