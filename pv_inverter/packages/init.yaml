@@ -48,7 +48,7 @@ api:
 ota:
   - platform: esphome
     id: ota_esphome
-    encryption: # reuses the api encryption key
+    password: "d1e798ea3dde0d5bcf3f3680d2f8fdfe"
 
 wifi:
   ssid: ${wifi_ssid}
